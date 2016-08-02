@@ -1,0 +1,30 @@
+{
+  "name": "frontend-nanodegree-mobile-portfolio",
+  "version": "1.0.0",
+  "description": "website optimization project P4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonalikatara/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "keywords": [
+    "web",
+    "optimization"
+  ],
+  "author": "Sonali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sonalikatara/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/sonalikatara/frontend-nanodegree-mobile-portfolio#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-responsive-images": "^0.1.9"
+  }
+}
