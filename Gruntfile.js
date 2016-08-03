@@ -62,20 +62,29 @@ module.exports = function(grunt) {
 
         }
 },
+	concat: {   
+    	  dist: {
+     	   src: [
+            'src/css/style.css',
+            'src/css/print.css'
+      	    ],
+      	   dest: 'dist/css/style.css',
+   	 }
+      },
 
-    /* Clear out the images directory if it exists */
+    /* Clear out the images and css directory if it exists */
     clean: {
       dev: {
         
-        src: ['dist/img','dist/views/images' ],
+        src: ['dist/img','dist/views/images', 'dist/css/style.css' ],
       },
     },
 
-    /* Generate the images directory if it is missing */
+    /* Generate the images and css directory if it is missing */
     mkdir: {
       dev: {
         options: {
-          create: ['dist/img','dist/views/images' ]
+          create: ['dist/img','dist/views/images', 'dist/css' ]
         },
       },
     }
@@ -85,12 +94,14 @@ module.exports = function(grunt) {
     // 3. Where we tell Grunt we plan to use this plug-in.
     grunt.loadNpmTasks('grunt-responsive-images');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-mkdir');
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin']);
+    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','concat']);
 
 };
 
