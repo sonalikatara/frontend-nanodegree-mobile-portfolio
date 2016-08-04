@@ -3,8 +3,8 @@ module.exports = function(grunt) {
     // 1. All configuration goes here 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
-       responsive_images: {
+      
+    responsive_images: {
     	responsiveTask: {
       	  options: {
            enginr : 'im',
@@ -72,6 +72,16 @@ module.exports = function(grunt) {
    	 }
       },
 
+     inlinecss: {
+             main:{
+	               files: {
+              'dist/index.html' : 'dist/index.html',
+           }
+
+	}
+       },
+
+
     /* Clear out the images and css directory if it exists */
     clean: {
       dev: {
@@ -95,13 +105,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-responsive-images');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
-
+    grunt.loadNpmTasks('grunt-inline-css');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-mkdir');
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','concat']);
+    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','concat','inlinecss']);
 
 };
 
