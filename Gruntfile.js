@@ -3,6 +3,14 @@ module.exports = function(grunt) {
     // 1. All configuration goes here 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+    copy: {
+      images: {
+       expand: true,
+       src: 'src/views/images/*',
+       dest: 'dist/views/images/'
+      }
+   },
       
     responsive_images: {
     	responsiveTask: {
@@ -55,7 +63,7 @@ module.exports = function(grunt) {
 		{
                  expand: true,
                  cwd:'dist/views/images/',
-                 src: ['*.jpg'],
+                 src: ['*.{png,jpg}'],
 		 dest:'dist/views/images/'	
 		}
 		]   
@@ -97,11 +105,13 @@ module.exports = function(grunt) {
           create: ['dist/img','dist/views/images', 'dist/css' ]
         },
       },
-    }
+    },
+   
     }
 );
 
     // 3. Where we tell Grunt we plan to use this plug-in.
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-responsive-images');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -111,7 +121,8 @@ module.exports = function(grunt) {
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','concat','inlinecss']);
+    grunt.registerTask('default', ['clean','mkdir','copy','responsive_images','imagemin','concat','inlinecss']);
 
 };
+
 
