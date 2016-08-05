@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 		}
 		]     
   	},
-         views: {
+         viewspng: {
 	   options:{
 		optimizationLevel: 5
 		},
@@ -66,12 +66,27 @@ module.exports = function(grunt) {
 		{
                  expand: true,
                  cwd:'dist/views/images/',
-                 src: ['*.{png,jpg}'],
+                 src: ['*.png'],
+		 dest:'dist/views/images/'	
+		}
+		]   
+
+        },
+      viewsjpg: {
+	   options:{
+		optimizationLevel: 5
+		},
+	     files: [
+		{
+                 expand: true,
+                 cwd:'dist/views/images/',
+                 src: ['*.jpg'],
 		 dest:'dist/views/images/'	
 		}
 		]   
 
         }
+
 },
 	concat: {   
     	  dist: {
