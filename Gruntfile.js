@@ -6,16 +6,19 @@ module.exports = function(grunt) {
 
     copy: {
       images: {
-       expand: true,
-       src: 'src/views/images/*',
-       dest: 'dist/views/images/'
+        files:[ {
+                 expand: true,
+                 cwd:'src/views/images/',
+                 src: ['*.{jpg,png}'],
+		 dest:'dist/views/images/'
+               }]
       }
    },
       
     responsive_images: {
     	responsiveTask: {
       	  options: {
-           enginr : 'im',
+          // enginr : 'im',
 	   sizes: [{
          	 width: 100,
                  suffix: '_100'
@@ -32,7 +35,7 @@ module.exports = function(grunt) {
 	 },
       	  files:[ {
                  expand: true,
-                 cwd:'src/views/images/',
+                 cwd:'dist/views/images/',
                  src: ['pizzeria.jpg'],
 		 dest:'dist/views/images/'
                }]
