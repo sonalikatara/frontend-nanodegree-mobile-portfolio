@@ -16,9 +16,27 @@ module.exports = function(grunt) {
    },
       
     responsive_images: {
+
+        smallerPizza: {
+           options: {
+          
+	   sizes: [{
+         	 width: 73.333,
+                 height: 100,
+                 suffix: '_sm'
+       	   }]
+	 },
+      	  files:[ {
+                 expand: true,
+                 cwd:'dist/views/images/',
+                 src: ['pizza.png'],
+		 dest:'dist/views/images/'
+               }]
+
+       },
     	responsiveTask: {
       	  options: {
-          // enginr : 'im',
+          
 	   sizes: [{
          	 width: 100,
                  suffix: '_100'

@@ -453,7 +453,10 @@ var resizePizzas = function(size) {
       var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
+      }
+     console.log('newwidth =' + newwidth);
+     console.log('no of pizzas =' + i);
+
   }
 
   changePizzaSizes(size);
@@ -500,10 +503,10 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
+  var pos =  document.body.scrollTop / 1250;
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin(pos + (i % 5));  // we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -524,10 +527,10 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 100; i++) {  // reduced the loop from 100 to 30 as we don't show 100 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza-73.333x100_sm.png";  // now using the correct size image 73.333x100
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
