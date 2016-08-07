@@ -120,6 +120,7 @@ module.exports = function(grunt) {
              main:{
 	               files: {
               'dist/index.html' : 'dist/index.html',
+              'dist/views/pizza.html' : 'dist/views/pizza.html'
            }
 
 	}
