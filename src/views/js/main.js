@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
  // var movingPizzas = document.querySelector("#movingPizzas1");
 
-  for (var i = 0; i < 100; i++) {  // reduced the loop from 100 to 30 as we don't show 100 pizzas
+  for (var i = 0; i < 50; i++) {  // reduced the loop from 200 to 50 as we don't show 200 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza-73.333x100_sm.png";  // now using the correct size image 73.333x100
