@@ -535,6 +535,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var movingPizzas = document.querySelector("#movingPizzas1");
+
   for (var i = 0; i < 100; i++) {  // reduced the loop from 100 to 30 as we don't show 100 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -543,7 +545,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-     document.getElementById("movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
+
+   //  document.getElementById("movingPizzas1").appendChild(elem);
     //document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
