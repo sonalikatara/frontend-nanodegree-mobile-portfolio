@@ -5,7 +5,16 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
     copy: {
-      images: {
+       images: {
+        files:[ {
+                 expand: true,
+                 cwd:'src/img/',
+                 src: ['*.{jpg,png}'],
+		 dest:'dist/img/'
+               }]
+      },
+
+      view_images: {
         files:[ {
                  expand: true,
                  cwd:'src/views/images/',
@@ -28,9 +37,9 @@ module.exports = function(grunt) {
 	 },
       	  files:[ {
                  expand: true,
-                 cwd:'dist/views/images/',
+                 cwd:'src/views/images/',
                  src: ['pizza.png'],
-		 dest:'dist/views/images/'
+		 dest:'src/views/images/'
                }]
 
        },
@@ -53,9 +62,9 @@ module.exports = function(grunt) {
 	 },
       	  files:[ {
                  expand: true,
-                 cwd:'dist/views/images/',
+                 cwd:'src/views/images/',
                  src: ['pizzeria.jpg'],
-		 dest:'dist/views/images/'
+		 dest:'src/views/images/'
                }]
          },
         
@@ -72,7 +81,7 @@ module.exports = function(grunt) {
                  expand: true,
                  cwd:'src/img/',
                  src: ['*.{png,jpg}'],
-		 dest:'dist/img/'
+		 dest:'src/img/'
 		}
 		]     
   	},
@@ -83,9 +92,9 @@ module.exports = function(grunt) {
 	     files: [
 		{
                  expand: true,
-                 cwd:'dist/views/images/',
+                 cwd:'src/views/images/',
                  src: ['*.png'],
-		 dest:'dist/views/images/'	
+		 dest:'src/views/images/'	
 		}
 		]   
 
@@ -97,15 +106,33 @@ module.exports = function(grunt) {
 	     files: [
 		{
                  expand: true,
-                 cwd:'dist/views/images/',
+                 cwd:'src/views/images/',
                  src: ['*.jpg'],
-		 dest:'dist/views/images/'	
+		 dest:'src/views/images/'	
 		}
 		]   
 
         }
 
 },
+// minify the javascript files
+       uglify: {
+	dist: {
+          files: {
+         'dist/views/js/main.min.js': ['src/views/js/main.js'],
+      }
+   }
+},
+// minify the views css
+   cssmin: {
+	dist: {
+          files: {
+         'dist/views/css/style.min.css': ['src/views/css/*.css'],
+      }
+   }
+},
+
+//concatinate the css files
 	concat: {   
     	  dist: {
      	   src: [
@@ -116,16 +143,31 @@ module.exports = function(grunt) {
    	 }
       },
 
+// inline the css
      inlinecss: {
              main:{
 	               files: {
-              'dist/index.html' : 'dist/index.html',
-              'dist/views/pizza.html' : 'dist/views/pizza.html'
+              'dist/index.html' : 'src/index.html',
+  //            'dist/views/pizza.html' : 'src/views/pizza.html'
            }
 
 	}
        },
-
+ // minify  the html files
+   htmlmin: {
+    dist: {
+	options: {
+         removeComments: true,
+         collapseWhitespace: true
+      },
+      files: [{
+         expand: true,
+         cwd: 'src',
+         src: '**/*.html',
+         dest: 'dist/'
+      }]
+    }
+},
 
     /* Clear out the images and css directory if it exists */
     clean: {
@@ -148,6 +190,9 @@ module.exports = function(grunt) {
 );
 
     // 3. Where we tell Grunt we plan to use this plug-in.
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-responsive-images');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -158,7 +203,7 @@ module.exports = function(grunt) {
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['clean','mkdir','copy','responsive_images','imagemin','concat','inlinecss']);
+    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','copy','uglify','concat','cssmin','inlinecss','htmlmin']);
 
 };
 
