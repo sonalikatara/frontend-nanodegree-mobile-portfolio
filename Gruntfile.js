@@ -203,7 +203,7 @@ module.exports = function(grunt) {
 
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','copy','uglify','concat','cssmin','inlinecss','htmlmin']);
+    grunt.registerTask('default', ['clean','mkdir','responsive_images','imagemin','copy','uglify','concat','cssmin','htmlmin','inlinecss']);
 
 };
 
