@@ -508,14 +508,14 @@ function updatePositions() {
   var items = document.getElementsByClassName('mover'); 
  var scrollTop = document.body.scrollTop;
  var pos =  scrollTop / 1250;
- var phase =0;
+/* var phase =0;
 for (var j = 0; j< 5; j++){
      phase[j] = 100 *  Math.sin(pos + j); 
-}
+} */
   for (var i = 0; i < items.length; i++) {
-   // var phase = Math.sin(pos + (i % 5));  // we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
-   // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
+    var phase = Math.sin(pos + (i % 5));  // we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+ // items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
 
   }
 
