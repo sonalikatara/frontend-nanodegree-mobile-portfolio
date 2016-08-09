@@ -452,11 +452,16 @@ var resizePizzas = function(size) {
  /// Took document.querySelectorAll(".randomPizzaContainer") out of the loop as it might cause some jank 
  /// Also replaces document.querySelectorAll with  document.getElementsByClassName as it is faster
 
-    var pizzaContainer = document.getElementsByClassName(".randomPizzaContainer");
+    var pizzaContainer = document.getElementsByClassName("randomPizzaContainer");
+/// move these vales out as they don't change
+     var dx = determineDx(pizzaContainer[0], size);
+     var newwidth = (pizzaContainer[0].offsetWidth + dx) + 'px';
+
     for (var i = 0; i < pizzaContainer.length; i++) {
-      var dx = determineDx(pizzaContainer[i], size);
-      var newwidth = (pizzaContainer[i].offsetWidth + dx) + 'px';
-      pizzaContainer[i].style.width = newwidth;
+     // var dx = determineDx(pizzaContainer[i], size);
+     // var newwidth = (pizzaContainer[i].offsetWidth + dx) + 'px';
+
+           pizzaContainer[i].style.width = newwidth;
       }
      console.log('newwidth =' + newwidth);
      console.log('no of pizzas =' + i);
@@ -571,6 +576,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
+
+
 
 
 
