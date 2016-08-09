@@ -449,11 +449,14 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+ /// Took document.querySelectorAll(".randomPizzaContainer") out of the loop as it might cause some jank 
+ /// Also replaces document.querySelectorAll with  document.getElementsByClassName as it is faster
+
     var pizzaContainer = document.getElementsByClassName(".randomPizzaContainer");
     for (var i = 0; i < pizzaContainer.length; i++) {
       var dx = determineDx(pizzaContainer[i], size);
       var newwidth = (pizzaContainer[i].offsetWidth + dx) + 'px';
-     pizzaContainer[i].style.width = newwidth;
+      pizzaContainer[i].style.width = newwidth;
       }
      console.log('newwidth =' + newwidth);
      console.log('no of pizzas =' + i);
@@ -487,8 +490,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+ var pizzasDiv = document.getElementById("randomPizzas");
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
+//  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -519,19 +524,20 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
- // var items = document.querySelectorAll('.mover'); 
-// A quicker better way to get items id document.getElementsByClass
+ /// var items = document.querySelectorAll('.mover'); 
+/// A quicker better way to get items id document.getElementsByClass
   var items = document.getElementsByClassName('mover'); 
  var scrollTop = document.body.scrollTop;
- var pos =  scrollTop / 1250;
-/* var phase =0;
+ var pos =  scrollTop / 1250;    /// we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
+
+ var phase =0;
 for (var j = 0; j< 5; j++){
      phase[j] = 100 *  Math.sin(pos + j); 
-} */
+} 
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(pos + (i % 5));  // we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
- // items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
+  //  var phase = Math.sin(pos + (i % 5)); 
+   // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
 
   }
 
@@ -552,7 +558,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
- // var movingPizzas = document.querySelector("#movingPizzas1");
+ var movingPizzas = document.querySelector("#movingPizzas1");
 
   for (var i = 0; i < 50; i++) {  // reduced the loop from 200 to 50 as we don't show 200 pizzas
     var elem = document.createElement('img');
@@ -562,10 +568,10 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-   // movingPizzas.appendChild(elem);
+    movingPizzas.appendChild(elem);
 
-   //  document.getElementById("movingPizzas1").appendChild(elem);
-    document.querySelector("#movingPizzas1").appendChild(elem);
+   /// document.getElementById("movingPizzas1").appendChild(elem);
+   // document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
