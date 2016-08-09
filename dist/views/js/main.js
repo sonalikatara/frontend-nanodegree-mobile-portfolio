@@ -553,13 +553,13 @@ for (var j = 0; j< 5; j++){
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
+var movingPizzas = document.querySelector("#movingPizzas1");
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
- var movingPizzas = document.querySelector("#movingPizzas1");
-
+ 
   for (var i = 0; i < 50; i++) {  // reduced the loop from 200 to 50 as we don't show 200 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
