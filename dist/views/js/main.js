@@ -537,7 +537,9 @@ for (var j = 0; j< 5; j++){
   for (var i = 0; i < items.length; i++) {
   //  var phase = Math.sin(pos + (i % 5)); 
    // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
+   // items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
+   items[i].style.transform = "translateX(" +  phase[i%5] + "px";
+ 
 
   }
 
@@ -553,27 +555,29 @@ for (var j = 0; j< 5; j++){
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
-var movingPizzas = document.querySelector("#movingPizzas1");
+
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
  
-  for (var i = 0; i < 50; i++) {  // reduced the loop from 200 to 50 as we don't show 200 pizzas
+  for (var i = 0; i < 50; i++) { /// reduced the loop from 200 to 50 as we don't show 200 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza-73.333x100_sm.png";  // now using the correct size image 73.333x100
+    elem.src = "images/pizza-73.333x100_sm.png"; /// now using the correct size image 73.333x100 to increase pagespeed score
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
 
-   /// document.getElementById("movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
    // document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
+
 
 
