@@ -538,7 +538,7 @@ for (var j = 0; j< 5; j++){
   //  var phase = Math.sin(pos + (i % 5)); 
    // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
    // items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
-   items[i].style.transform = "translateX(" +  phase[i%5] + "px";
+   items[i].style.transform = "translateX(" +  phase[i%5] + "px)";
  
 
   }
