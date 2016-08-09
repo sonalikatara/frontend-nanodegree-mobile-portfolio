@@ -523,24 +523,20 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
+   var items = document.getElementsByClassName('mover'); 
+ var scrollTop = document.body.scrollTop;
+
   window.performance.mark("mark_start_frame");
  /// var items = document.querySelectorAll('.mover'); 
 /// A quicker better way to get items id document.getElementsByClass
-  var items = document.getElementsByClassName('mover'); 
- var scrollTop = document.body.scrollTop;
- var pos =  scrollTop / 1250;    /// we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
-
- var phase =0;
+  var pos =  scrollTop / 1250;    /// we don't need to calculate the same value repeatedly and should try to acess the doc tree as few times as possible so I moved (document.body.scrollTop / 1250) ablove the loop and kept it in a varible called pos.
+///Further optimize the loop by calculating and storing the 5 repitative values of phases in an array to be used later 
+var  phase = []
 for (var j = 0; j< 5; j++){
      phase[j] = 100 *  Math.sin(pos + j); 
 } 
   for (var i = 0; i < items.length; i++) {
-  //  var phase = Math.sin(pos + (i % 5)); 
-   // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-   // items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
-   items[i].style.transform = "translateX(" +  phase[i%5] + "px)";
- 
-
+     items[i].style.left = items[i].basicLeft +  phase[i%5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -561,7 +557,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
- 
+  var movingPizzas =  document.getElementById("movingPizzas1"); /// optimize by accessing the element once
   for (var i = 0; i < 50; i++) { /// reduced the loop from 200 to 50 as we don't show 200 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -570,8 +566,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    //  document.getElementsById("movingPizzas1").appendChild(elem);
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
+  //  document.querySelector("#movingPizzas1").appendChild(elem); 
   }
   updatePositions();
 });
