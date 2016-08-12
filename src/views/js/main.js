@@ -380,6 +380,10 @@ var pizzaElementGenerator = function(i) {
 
  
   pizzaImage.src = "images/pizza.png";
+  pizzaImage.transform= 'TranslateZ(0)';
+  pizzaImage.style.webkitTransform = "transform";
+  pizzaImage.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza
+
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -467,7 +471,7 @@ var resizePizzas = function(size) {
   }
 
 
-  changePizzaSizes(size);
+ window.requestAnimationFrame(changePizzaSizes);  ////--- Requested Annimation frame to inform the browser to perform calculations before painting
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -496,6 +500,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 // Iterator for number of times the pizzas in the background have scrolled.
 // Used by updatePositions() to decide when to log the average time per frame
 var frame = 0;
+ 
 
 // Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
@@ -515,7 +520,7 @@ function updatePositions() {
   frame++;
 ///---- var items = document.querySelectorAll('.mover'); 
 ///---- A quicker better way to get items id document.getElementsByClass
- var items = document.getElementsByClassName('mover'); 
+  var items = document.getElementsByClassName('mover'); 
  
   var scrollTop = document.body.scrollTop;
   window.performance.mark("mark_start_frame");
@@ -526,13 +531,13 @@ var  phase = []
 for (var j = 0; j< 5; j++){
      phase[j] = 1000 *  Math.sin(pos + j); 
 } 
-  for (var i = 0; i < items.length; i++) {
+ var len = items.length;
+  for (var i = 0; i < len; i++) {
       var left =  -items[i].basicLeft + phase[i%5] + 'px' 
 ///---- optimize my making the movement of pizzas with css instead of using javaScript
      items[i].style.transform = 'translateX('+ left + ')';
          
   }
-
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
@@ -558,10 +563,11 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 32; i++) { ///---- reduced the loop from 200 to 32 as we don't show 200 pizzas
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza-73.333x100_sm.png"; ///--- now using the correct size image 73.333x100 to increase pagespeed score
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-    elem.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza
+    elem.src = "images/pizza-73.333x100_sm.png"; ///--- now using the correct size image 73x94to increase pagespeed score
+    elem.style.height = "94px";
+    elem.style.width = "73px";
+ //   elem.style.webkitTransform = "transform";
+ //   elem.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza --- further optimized by moving this to css
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
@@ -569,6 +575,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   window.requestAnimationFrame(updatePositions);
 });
+
+
 
 
 

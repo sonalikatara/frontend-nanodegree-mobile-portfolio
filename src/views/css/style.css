@@ -31,7 +31,8 @@ form {
 
 .mover {
   position: fixed;
-  width: 256px;
+ /* width: 256px; */
+ will-change: transform;
   z-index: -1;
 }
 
@@ -49,3 +50,4 @@ form {
  .container {
   background-color: rgba(240, 60, 60, 0.8);
 }
+
