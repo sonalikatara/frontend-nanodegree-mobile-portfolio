@@ -21,7 +21,12 @@ module.exports = function(grunt) {
                  src: ['*.{jpg,png}'],
 		 dest:'dist/views/images/'
                }]
-      }
+      },
+      html : {
+        files :[{
+             'dist/views/pizza.html' : 'src/views/pizza.html'
+		}]
+     }
    },
       
     responsive_images: {
@@ -148,7 +153,7 @@ module.exports = function(grunt) {
              main:{
 	               files: {
               'dist/index.html' : 'src/index.html',
-  //            'dist/views/pizza.html' : 'src/views/pizza.html'
+          //   'dist/views/pizza.html' : 'dist/views/pizza.html'
            }
 
 	}

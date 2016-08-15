@@ -402,13 +402,12 @@ var pizzaElementGenerator = function(i) {
 
   return pizzaContainer;
 };
-
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
-
  // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
+   
     switch(size) {
       case "1":
         document.querySelector("#pizzaSize").innerHTML = "Small";
@@ -425,6 +424,8 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
+
+
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
@@ -445,10 +446,8 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
       }
     }
-
     var newSize = sizeSwitcher(size);
     var dx = (newSize - oldSize) * windowWidth;
-
     return dx;
   }
 
@@ -459,19 +458,18 @@ var resizePizzas = function(size) {
 
     var pizzaContainer = document.getElementsByClassName("randomPizzaContainer");
 
-///------ move these vales out as they don't change
+///------ move these values out as they don't change
+            var dx = determineDx(pizzaContainer[0], size);
+            var newwidth = (pizzaContainer[0].offsetWidth + dx) + 'px';
 
-     var dx = determineDx(pizzaContainer[0], size);
-     var newwidth = (pizzaContainer[0].offsetWidth + dx) + 'px';
-
-    for (var i = 0; i < pizzaContainer.length; i++) {
-              pizzaContainer[i].style.width = newwidth;
+            for (var i = 0; i < pizzaContainer.length; i++) {
+                     pizzaContainer[i].style.width = newwidth ;
       }
    
   }
 
 
- window.requestAnimationFrame(changePizzaSizes);  ////--- Requested Annimation frame to inform the browser to perform calculations before painting
+ changePizzaSizes(size);  ////---  how do I use Requested Annimation frame to inform the browser to perform this calculations before painting
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -566,8 +564,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza-73.333x100_sm.png"; ///--- now using the correct size image 73x94to increase pagespeed score
     elem.style.height = "94px";
     elem.style.width = "73px";
- //   elem.style.webkitTransform = "transform";
- //   elem.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza --- further optimized by moving this to css
+    elem.style.webkitTransform = "transform";
+    elem.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza --- further optimized by moving this to css
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
