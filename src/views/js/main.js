@@ -469,7 +469,7 @@ var resizePizzas = function(size) {
   }
 
 
- changePizzaSizes(size);  ////---  how do I use Requested Annimation frame to inform the browser to perform this calculations before painting
+ changePizzaSizes(size);  ////---  how do I use RequestAnimationFrame() to inform the browser to perform this calculations before painting
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -571,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
     movingPizzas.appendChild(elem);
 
   }
-  window.requestAnimationFrame(updatePositions);
+  window.requestAnimationFrame(updatePositions);   ///------ added RequestAnimationFrame 
 });
 
 
