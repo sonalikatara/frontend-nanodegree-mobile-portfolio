@@ -61,15 +61,16 @@ There is a FPS Counter/HUD Display useful in Chrome developer tools described he
    I replaced document.querySelectorAll() with document.getElementsByClassName() or document.getElementsById() to mahe the execution faster.
    
 5. I used layering and RequestAnimationFrame() to further optimize the page.
+6. 
    `pizzaImage.transform= 'TranslateZ(0)';
 
    pizzaImage.style.webkitTransform = "transform";
    
-   pizzaImage.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza
-   `
+   pizzaImage.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza `
    
-    `
-    window.requestAnimationFrame(updatePositions);
+   
+   `
+   window.requestAnimationFrame(updatePositions);
 
    `
 
