@@ -51,7 +51,9 @@ There is a FPS Counter/HUD Display useful in Chrome developer tools described he
    I optimized the for loop by moving out the calculations that needed to be done only once.
    I replaced document.querySelectorAll() with document.getElementsByClassName() or document.getElementsById() to mahe the execution faster.
    The movement of pizzas was done thought javascript, I tried to optimize it by moving them using the css transform-translate property
+
    ` items[i].style.transform = 'translateX('+ left + ')';`
+   
    The number of pizzas generated was 200, which is way more than the number of pizzas shown. I reduced it to 32. This reduced the jank a significantly.
 
 4. The function changePizzaSizes() also causes jank.
@@ -60,11 +62,14 @@ There is a FPS Counter/HUD Display useful in Chrome developer tools described he
    
 5. I used layering and RequestAnimationFrame() to further optimize the page.
    `pizzaImage.transform= 'TranslateZ(0)';
-    pizzaImage.style.webkitTransform = "transform";
-    pizzaImage.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza
+
+   pizzaImage.style.webkitTransform = "transform";
+   
+   pizzaImage.style.willChange = "transform";        ///---- optimize by informing the browser to make layers for each pizza
    `
+   
     `
-     window.requestAnimationFrame(updatePositions);
+    window.requestAnimationFrame(updatePositions);
 
    `
 
