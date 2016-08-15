@@ -4,8 +4,10 @@ The challenge was to optimize this online portfolio for speed! In particular, op
 
 To get started, I checked out the repository  and inspected the code.
 
-### The project is online at [https://sonalikatara.github.io/frontend-nanodegree-mobile-portfolio/dist/](https://sonalikatara.github.io/frontend-nanodegree-mobile-portfolio/dist/).
+#### The project is online at [https://sonalikatara.github.io/frontend-nanodegree-mobile-portfolio/dist/](https://sonalikatara.github.io/frontend-nanodegree-mobile-portfolio/dist/).
 
+
+##### The source code is in the src folder of this repository.
 
 
 ### Getting started
@@ -70,7 +72,19 @@ There is a FPS Counter/HUD Display useful in Chrome developer tools described he
   
 
 
-
+The Grunt tasks used are :
+`
+     grunt-contrib-cssmin'
+     grunt-contrib-uglify'  
+     grunt-contrib-htmlmin'  
+     grunt-contrib-copy'  
+     grunt-responsive-images'  
+     grunt-contrib-imagemin'  
+     grunt-contrib-concat'  
+     grunt-inline-css'  
+     grunt-contrib-clean'  
+     grunt-mkdir'
+`
 
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
